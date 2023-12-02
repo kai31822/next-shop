@@ -1,0 +1,112 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// model
+model User {
+  User_ID   String   @id @default(uuid())
+  email     String   @unique
+  name      String?
+  password  String
+  role      Role     @default(USER)
+  address   String?
+  phone     Int?
+  //
+  Order     Order[]
+  //One to One  https://www.prisma.io/docs/concepts/components/prisma-schema/relations/one-to-one-relations
+  Cart      Cart?
+  //
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+// one to many https://www.prisma.io/docs/concepts/components/prisma-schema/relations/one-to-many-relations
+model Product {
+  Product_ID          String    @id @default(uuid())
+  Product_name        String
+  Product_description String
+  Price               Int
+  Image               String?
+  Product_quantity    Int?
+  // category
+  category            Category  @relation(fields: [categoryId], references: [id])
+  categoryId          Int
+  //
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+  //
+  Details             Details[]
+}
+
+model Category {
+  id       Int       @id @default(autoincrement())
+  name     String
+  products Product[]
+}
+
+//
+// many to many  https://www.prisma.io/docs/concepts/components/prisma-schema/relations/many-to-many-relations#explicit-many-to-many-relations
+
+model Order {
+  Order_ID           String   @id @default(uuid())
+  Order_status       Status
+  //user
+  User               User?    @relation(fields: [UserID], references: [User_ID])
+  UserID             String?
+  //
+  Express_Address    String?
+  Order_Email        String?
+  Order_Phone        Int?
+  Order_City         String?
+  Order_Postal_code  String?
+  Order_Express_cost Int
+  //
+  Cart               Cart?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+enum Status {
+  Padding
+  Done
+}
+
+//
+model Cart {
+  Cart_ID    String    @id @default(uuid())
+  //user
+  User       User?     @relation(fields: [UserID], references: [User_ID])
+  UserID     String?   @unique // One to One
+  //guest
+  guest      String?
+  Details    Details[]
+  Order      Order?    @relation(fields: [OrderID], references: [Order_ID])
+  OrderID    String?   @unique // One to One
+  Order_Date DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+}
+
+model Details {
+  Order_ID    String   @id @default(uuid())
+  Cart        Cart?    @relation(fields: [CartCart_ID], references: [Cart_ID])
+  CartCart_ID String?
+  Product     Product? @relation(fields: [Product_ID], references: [Product_ID])
+  Product_ID  String?
+  Quantity    Int
+  //
+}
+
+//
