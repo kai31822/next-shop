@@ -8,10 +8,13 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 //for fetch fake data
 type Product = {
-    id?: number;
-    product_name?: string;
-    price?: number;
-    description?: string;
+    Product_ID?: number;
+    Product_name?: string;
+    Product_description?: string;
+    Price?: number;
+    Image?: string;
+    Product_quantity?: number;
+    categoryId?: number;
 };
 
 const AllProduct = () => {
@@ -42,7 +45,7 @@ const AllProduct = () => {
     const [data, setData] = useState<Product[] | undefined>();
     useEffect(() => {
         setLoading(true);
-        fetch('http://localhost:4000/product')
+        fetch('http://localhost:3000/api/products')
             .then(res => res.json())
             .then(data => {
                 setData(data);
@@ -51,23 +54,23 @@ const AllProduct = () => {
     }, []);
     if (loading) return <p>Loading...</p>;
     return (
-        <div className='grid grid-cols-3 gap-8'>
+        <div className='grid xl:grid-cols-4 lg:grid-cols-3 gap-8 md:grid-cols-2 sm:grid-cols-1'>
             {data?.map(d => (
-                <Card key={d.id} className='flex flex-col justify-between'>
+                <Card key={d.Product_ID} className='flex flex-col justify-between'>
                     <CardHeader className='flex-row gap-4 items-center '>
                         {/* avatar */}
                         <Avatar>
-                            <AvatarImage src={`./img/201992.jpg`} alt='product img' />
-                            <AvatarFallback>{d.product_name?.slice(0, 2)}</AvatarFallback>
+                            <AvatarImage src={`${d.Image ?? "./img/201992.jpg"} `} alt='product img' />
+                            <AvatarFallback>{d.Product_name?.slice(0, 2)}</AvatarFallback>
                         </Avatar>
 
                         <div>
-                            <CardTitle>{d.product_name}</CardTitle>
-                            <CardDescription>description:{d.description}</CardDescription>
+                            <CardTitle>{d.Product_name}</CardTitle>
+                            <CardDescription>description:{d.Product_description}</CardDescription>
                         </div>
                     </CardHeader>
                     <CardContent>
-                        <p>price:{d.price}</p>
+                        <p>price:{d.Price}</p>
                     </CardContent>
                     <CardFooter className='flex justify-between'>
                         <Button>view detail</Button>
