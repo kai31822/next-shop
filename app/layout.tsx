@@ -5,7 +5,7 @@ import '@radix-ui/themes/styles.css';
 //ui
 
 import Navbar from '@/app/components/ui/Navbar';
-import Footer from './components/ui/Footer';
+import Footer from './components/ui/Footer/Footer';
 
 //
 const inter = Inter({ subsets: ['latin'] });
