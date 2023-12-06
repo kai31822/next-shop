@@ -1,14 +1,15 @@
 'use client';
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation'
 //ui
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
-//for fetch fake data
+//for fetch data
 type Product = {
-    Product_ID?: number;
+    Product_ID?: string;
     Product_name?: string;
     Product_description?: string;
     Price?: number;
@@ -18,28 +19,29 @@ type Product = {
 };
 
 const AllProduct = () => {
+    const router = useRouter()
     //check loading...
     const [loading, setLoading] = useState(false);
     //fetch data
-    const fetchDataFromApi = async () => {
-        try {
-            setLoading(true);
-            const response = await fetch('/api/users', {
-                headers: {
-                    Accept: 'application/json',
-                    method: 'GET',
-                },
-            });
-            if (response) {
-                const data = await response.json();
-                console.log(data);
-            }
-        } catch (error) {
-            console.log(error);
-        } finally {
-            setLoading(false);
-        }
-    };
+    // const fetchDataFromApi = async () => {
+    //     try {
+    //         setLoading(true);
+    //         const response = await fetch('/api/users', {
+    //             headers: {
+    //                 Accept: 'application/json',
+    //                 method: 'GET',
+    //             },
+    //         });
+    //         if (response) {
+    //             const data = await response.json();
+    //             console.log(data);
+    //         }
+    //     } catch (error) {
+    //         console.log(error);
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // };
 
     //fetch fake data
     const [data, setData] = useState<Product[] | undefined>();
@@ -53,10 +55,11 @@ const AllProduct = () => {
             });
     }, []);
     if (loading) return <p>Loading...</p>;
+
     return (
         <div className='grid xl:grid-cols-4 lg:grid-cols-3 gap-8 md:grid-cols-2 sm:grid-cols-1'>
             {data?.map(d => (
-                <Card key={d.Product_ID} className='flex flex-col justify-between'>
+                <Card key={d.Product_ID} className='flex flex-col justify-between' >
                     <CardHeader className='flex-row gap-4 items-center '>
                         {/* avatar */}
                         <Avatar>
@@ -73,7 +76,7 @@ const AllProduct = () => {
                         <p>price:{d.Price}</p>
                     </CardContent>
                     <CardFooter className='flex justify-between'>
-                        <Button>view detail</Button>
+                        <Button onClick={() => router.push(`product/${d.Product_ID}`)}>view detail</Button>
                         <Badge variant='outline'>detail</Badge>
                     </CardFooter>
                 </Card>

@@ -20,7 +20,7 @@ const roboto = Roboto({ subsets: ['latin'], weight: ['300'] })
 
 const Navbar = () => {
     const links = [
-        { label: '配件', href: '/proudect' },
+        { label: '配件', href: '/product' },
         { label: '產品情報', href: '/about' },
         { label: '門市資訊', href: '/storeinformation' },
     ];
@@ -73,7 +73,7 @@ const Navbar = () => {
                         </div>
                         {/* cart / user */}
                         <div className='flex items-center gap-8 md:gap-12'>
-                            <h1>Cartcount</h1>
+                            <Link href='/cart'>Cartcount</Link>
                             <h1>UserMenu</h1>
                         </div>
                     </div>
