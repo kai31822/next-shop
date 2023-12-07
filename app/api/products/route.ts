@@ -10,7 +10,13 @@ export const createProductsSchema = z.object({
     Product_name: z.string(),
     Product_description: z.string(),
     Price: z.number(),
+    brand: z.string(),
     Product_quantity: z.number(),
+    Image: z.object({
+        id: z.string(),
+        color: z.string(),
+        image: z.string()
+    }),
     categoryId: z.number()
 });
 
@@ -28,7 +34,9 @@ export async function POST(request: NextRequest) {
             Product_name: body.Product_name,
             Product_description: body.Product_description,
             Price: body.Price,
+            brand: body.brand,
             Product_quantity: body.Product_quantity,
+            Image: body.Image,
             categoryId: body.categoryId
 
         }
@@ -39,6 +47,6 @@ export async function POST(request: NextRequest) {
 
 //read Products
 export async function GET() {
-    const products= await prisma.product.findMany()
+    const products = await prisma.product.findMany()
     return NextResponse.json(products, { status: 201 })
 }

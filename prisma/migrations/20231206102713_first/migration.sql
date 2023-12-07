@@ -1,21 +1,18 @@
-/*
-  Warnings:
+-- CreateTable
+CREATE TABLE `User` (
+    `User_ID` VARCHAR(191) NOT NULL,
+    `email` VARCHAR(191) NOT NULL,
+    `name` VARCHAR(191) NULL,
+    `password` VARCHAR(191) NOT NULL,
+    `role` ENUM('USER', 'ADMIN') NOT NULL DEFAULT 'USER',
+    `address` VARCHAR(191) NULL,
+    `phone` INTEGER NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL,
 
-  - The primary key for the `User` table will be changed. If it partially fails, the table could be left without primary key constraint.
-  - You are about to drop the column `id` on the `User` table. All the data in the column will be lost.
-  - The required column `User_ID` was added to the `User` table with a prisma-level default value. This is not possible if the table is not empty. Please add this column as optional, then populate it before making it required.
-  - Added the required column `updatedAt` to the `User` table without a default value. This is not possible if the table is not empty.
-
-*/
--- AlterTable
-ALTER TABLE `User` DROP PRIMARY KEY,
-    DROP COLUMN `id`,
-    ADD COLUMN `User_ID` VARCHAR(191) NOT NULL,
-    ADD COLUMN `address` VARCHAR(191) NULL,
-    ADD COLUMN `phone` INTEGER NULL,
-    ADD COLUMN `role` ENUM('USER', 'ADMIN') NOT NULL DEFAULT 'USER',
-    ADD COLUMN `updatedAt` DATETIME(3) NOT NULL,
-    ADD PRIMARY KEY (`User_ID`);
+    UNIQUE INDEX `User_email_key`(`email`),
+    PRIMARY KEY (`User_ID`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
 CREATE TABLE `Product` (
@@ -23,13 +20,23 @@ CREATE TABLE `Product` (
     `Product_name` VARCHAR(191) NOT NULL,
     `Product_description` VARCHAR(191) NOT NULL,
     `Price` INTEGER NOT NULL,
-    `Image` VARCHAR(191) NULL,
+    `brand` VARCHAR(191) NOT NULL,
     `Product_quantity` INTEGER NULL,
     `categoryId` INTEGER NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
     PRIMARY KEY (`Product_ID`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `Image` (
+    `id` VARCHAR(191) NOT NULL,
+    `color` VARCHAR(191) NOT NULL,
+    `image` VARCHAR(191) NOT NULL,
+    `productProduct_ID` VARCHAR(191) NULL,
+
+    PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
@@ -83,6 +90,9 @@ CREATE TABLE `Details` (
 
 -- AddForeignKey
 ALTER TABLE `Product` ADD CONSTRAINT `Product_categoryId_fkey` FOREIGN KEY (`categoryId`) REFERENCES `Category`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Image` ADD CONSTRAINT `Image_productProduct_ID_fkey` FOREIGN KEY (`productProduct_ID`) REFERENCES `Product`(`Product_ID`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `Order` ADD CONSTRAINT `Order_UserID_fkey` FOREIGN KEY (`UserID`) REFERENCES `User`(`User_ID`) ON DELETE SET NULL ON UPDATE CASCADE;

@@ -16,16 +16,16 @@ const ProductCard: React.FC<ProudctCardProps> = ({ data }: ProudctCardProps) => 
             <div className='flex flex-col items-center w-full gap-1'>
                 {/* image */}
                 <div className='aspect-square overflow-hidden relative w-full '>
-                    <Image src={data.Image} alt={data.Product_name} fill></Image>
+                    <Image src={data.Image} alt={data.name} fill></Image>
                 </div>
                 {/* text */}
-                <div className='mt-4'>{truncateText(data.Product_name)}</div>
+                <div className='mt-4'>{truncateText(data.name)}</div>
                 {/*  */}
-                <div className='mt-4' title={data.Product_description}>{truncateText(data.Product_description)}</div>
+                <div className='mt-4' title={data.description}>{truncateText(data.description)}</div>
                 {/*  */}
                 <div></div>
                 {/* price */}
-                <div className='font-semibold'>{formatPrice(data.Price)}</div>
+                <div className='font-semibold'>{formatPrice(data.price)}</div>
             </div>
         </div>
     )

@@ -1,6 +1,6 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
-
+//npx prisma migrate dev
 generator client {
   provider = "prisma-client-js"
 }
@@ -39,8 +39,9 @@ model Product {
   Product_name        String
   Product_description String
   Price               Int
-  Image               String?
-  Product_quantity    Int?
+  brand               String
+  Image               Image[]
+  Product_quantity    Int       @default(0)
   // category
   category            Category  @relation(fields: [categoryId], references: [id])
   categoryId          Int
@@ -49,6 +50,14 @@ model Product {
   updatedAt           DateTime  @updatedAt
   //
   Details             Details[]
+}
+
+model Image {
+  id                String   @id @default(uuid())
+  color             String
+  image             String
+  Product           Product? @relation(fields: [productProduct_ID], references: [Product_ID])
+  productProduct_ID String?
 }
 
 model Category {

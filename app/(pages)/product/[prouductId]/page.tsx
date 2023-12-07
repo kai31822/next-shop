@@ -7,6 +7,7 @@ interface Iparams {
   productId?: string
 }
 
+
 const ProudctInfo = ({ params }: { params: Iparams }) => {
   console.log(params);
 
