@@ -1,5 +1,6 @@
 'use client'
 import Horizontal from '@/app/components/Horizontal';
+import Button from '@/app/components/ui/product/Button';
 import SetColor from '@/app/components/ui/product/SetColor';
 import SetQuantity from '@/app/components/ui/product/SetQuantity';
 import React, { useCallback, useState } from 'react'
@@ -104,9 +105,12 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
                 <Horizontal />
                 <SetQuantity cartProduct={cartProduct} handleQtyDecrease={handleQtyDecrease} handleQtyIncrease={handleQtyIncrease} />
                 <Horizontal />
-                <div>add to cart</div>
+                <div className='max-w-[300px]'>
+                    <Button label='Add To Cart' onClick={() => { }
+                    } />
+                </div>
             </div>
-        </div>
+        </div >
     )
 }
 
