@@ -1,6 +1,7 @@
 'use client'
 import Horizontal from '@/app/components/Horizontal';
 import Button from '@/app/components/ui/product/Button';
+import ProductImage from '@/app/components/ui/product/ProductImage';
 import SetColor from '@/app/components/ui/product/SetColor';
 import SetQuantity from '@/app/components/ui/product/SetQuantity';
 import React, { useCallback, useState } from 'react'
@@ -83,7 +84,8 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
 
     return (
         <div className='grid grid-cols-1 md:grid-cols-2 gap-12'>
-            <div>image</div>
+            {/* image */}
+            <ProductImage product={product} cartProduct={cartProduct} handleColorSelect={handleColorSelect} ></ProductImage>
             <div className='flex flex-col gap-1 text-slate-500 text-sm '>
                 {/* name */}
                 <h2 className='text-3xl font-medium text-slate-700'>{product.name}</h2>

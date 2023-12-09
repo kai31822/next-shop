@@ -12,13 +12,13 @@ export const products = [
                 color: "White",
                 colorCode: "#FFFFFF",
                 image:
-                    "https://firebasestorage.googleapis.com/v0/b/e-shop-vid.appspot.com/o/products%2F1694245643713-iphone14-white.png?alt=media&token=2486cd23-8aa9-449e-8563-8c8a3278d0b4",
+                    '/img/201992.jpg',
             },
             {
                 color: "Gray",
                 colorCode: "#808080",
                 image:
-                    "https://firebasestorage.googleapis.com/v0/b/e-shop-vid.appspot.com/o/products%2F1694245647731-iphone14-gray.png?alt=media&token=ba0019e0-a6cb-4da7-b214-6252bf57f7e3",
+                    '/img/790418.jpg',
             },
         ],
         reviews: [],
@@ -37,7 +37,7 @@ export const products = [
                 color: "Black",
                 colorCode: "#000000",
                 image:
-                    "https://firebasestorage.googleapis.com/v0/b/e-shop-vid.appspot.com/o/products%2Flogitech-graphite.png?alt=media&token=d07334d8-ab2b-4648-a38b-2a062a1a49bc",
+                    "https://images.unsplash.com/photo-1453060590797-2d5f419b54cb?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
             },
         ],
         reviews: [
@@ -54,7 +54,7 @@ export const products = [
                     email: "example@gmail.com",
                     emailVerified: null,
                     image:
-                        "https://lh3.googleusercontent.com/a/AAcHTteOiCtILLBWiAoolIW9PJH-r5825pBDl824_8LD=s96-c",
+                        "https://images.unsplash.com/photo-1453060590797-2d5f419b54cb?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                     hashedPassword: null,
                     createdAt: "2023-05-30T08:08:53.979Z",
                     updatedAt: "2023-05-30T08:08:53.979Z",
@@ -77,19 +77,19 @@ export const products = [
                 color: "Black",
                 colorCode: "#000000",
                 image:
-                    "https://firebasestorage.googleapis.com/v0/b/e-shop-vid.appspot.com/o/products%2Fiphone%2012%20black.png?alt=media&token=8fe19551-173a-4550-9d02-20afffc79b12",
+                    "https://picsum.photos/200/300?random=1",
             },
             {
                 color: "Blue",
                 colorCode: " #0000FF",
                 image:
-                    "https://firebasestorage.googleapis.com/v0/b/e-shop-vid.appspot.com/o/products%2Fiphone%2012%20blue.png?alt=media&token=ede757d2-b631-4451-b80c-123861f16c92",
+                    "https://picsum.photos/200/300?random=1",
             },
             {
                 color: "Red",
                 colorCode: "#FF0000",
                 image:
-                    "https://firebasestorage.googleapis.com/v0/b/e-shop-vid.appspot.com/o/products%2Fiphone%2012%20red.png?alt=media&token=945e1ffb-953e-467a-8325-5a8fbbbf3153",
+                    "https://picsum.photos/200/300?random=1",
             },
         ],
         reviews: [
@@ -107,7 +107,7 @@ export const products = [
                     email: "example1@gmail.com",
                     emailVerified: null,
                     image:
-                        "https://lh3.googleusercontent.com/a/AAcHTtcuRLwWi1vPKaQOcJlUurlhRAIIq2LgYccE8p32=s96-c",
+                        "https://picsum.photos/200/300?random=1",
                     hashedPassword: null,
                     createdAt: "2023-06-26T15:40:52.558Z",
                     updatedAt: "2023-06-26T15:40:52.558Z",
@@ -127,7 +127,7 @@ export const products = [
                     email: "example@gmail.com",
                     emailVerified: null,
                     image:
-                        "https://lh3.googleusercontent.com/a/AAcHTteOiCtILLBWiAoolIW9PJH-r5825pBDl824_8LD=s96-c",
+                        "https://picsum.photos/200/300?random=1",
                     hashedPassword: null,
                     createdAt: "2023-05-30T08:08:53.979Z",
                     updatedAt: "2023-05-30T08:08:53.979Z",
@@ -169,13 +169,13 @@ export const products = [
                 color: "Black",
                 colorCode: "#000000",
                 image:
-                    "https://firebasestorage.googleapis.com/v0/b/e-shop-vid.appspot.com/o/products%2F1695192445608-watch-black.jpg?alt=media&token=4446b901-01ab-4152-8953-e36b22608755",
+                    "https://picsum.photos/200/300?random=1",
             },
             {
                 color: "Silver",
                 colorCode: "#C0C0C0",
                 image:
-                    "https://firebasestorage.googleapis.com/v0/b/e-shop-vid.appspot.com/o/products%2F1695192448311-watch-silver.jpg?alt=media&token=a76bec63-f616-4647-9dd3-b3d23407ba4f",
+                    "https://picsum.photos/200/300?random=1",
             },
         ],
         reviews: [],
@@ -194,15 +194,34 @@ export const product = {
         {
             color: "Black",
             colorCode: "#000000",
-            image:
-                "https://firebasestorage.googleapis.com/v0/b/e-shop-vid.appspot.com/o/products%2F1695192445608-watch-black.jpg?alt=media&token=4446b901-01ab-4152-8953-e36b22608755",
+            image: '/img/201992.jpg',
         },
         {
             color: "Silver",
             colorCode: "#C0C0C0",
-            image:
-                "https://firebasestorage.googleapis.com/v0/b/e-shop-vid.appspot.com/o/products%2F1695192448311-watch-silver.jpg?alt=media&token=a76bec63-f616-4647-9dd3-b3d23407ba4f",
+            image: '/img/790418.jpg',
         },
     ],
-    reviews: [],
+    reviews: [
+        {
+            id: "64a65a6158b470c6e06959ee",
+            userId: "6475af156bad4917456e6e1e",
+            productId: "64a4ebe300900d44bb50628a",
+            rating: 5,
+            comment: "good",
+            createdDate: "2023-07-06T06:08:33.067Z",
+            user: {
+                id: "6475af156bad4917456e6e1e",
+                name: "Charles",
+                email: "example@gmail.com",
+                emailVerified: null,
+                image:
+                    "https://picsum.photos/200/200?random=1",
+                hashedPassword: null,
+                createdAt: "2023-05-30T08:08:53.979Z",
+                updatedAt: "2023-05-30T08:08:53.979Z",
+                role: "ADMIN",
+            },
+        },
+    ],
 }
