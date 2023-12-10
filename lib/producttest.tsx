@@ -21,7 +21,28 @@ export const products = [
                     '/img/790418.jpg',
             },
         ],
-        reviews: [],
+        reviews: [
+            {
+                id: "64a65a6158b470c6e06959ee",
+                userId: "6475af156bad4917456e6e1e",
+                productId: "64a4ebe300900d44bb50628a",
+                rating: 5,
+                comment: "good",
+                createdDate: "2023-07-06T06:08:33.067Z",
+                user: {
+                    id: "6475af156bad4917456e6e1e",
+                    name: "Charles",
+                    email: "example@gmail.com",
+                    emailVerified: null,
+                    image:
+                        "https://images.unsplash.com/photo-1453060590797-2d5f419b54cb?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                    hashedPassword: null,
+                    createdAt: "2023-05-30T08:08:53.979Z",
+                    updatedAt: "2023-05-30T08:08:53.979Z",
+                    role: "ADMIN",
+                },
+            },
+        ],
     },
     {
         id: "64a4ebe300900d44bb50628a",
@@ -150,7 +171,7 @@ export const products = [
                 color: "Graphite",
                 colorCode: " #383838",
                 image:
-                    "https://firebasestorage.googleapis.com/v0/b/e-shop-vid.appspot.com/o/products%2Flogitech-graphite.png?alt=media&token=d07334d8-ab2b-4648-a38b-2a062a1a49bc",
+                    "/img/201992.jpg",
             },
         ],
         reviews: [],
@@ -182,24 +203,25 @@ export const products = [
     },
 ];
 export const product = {
-    id: "649d775128b6744f0f497040",
-    name: 'Smart Watch(Answer/Make Call), 1.85" Smartwatch for Men Women IP68 Waterproof, 100+ Sport Modes, Fitness Activity Tracker, Heart Rate Sleep Monitor, Pedometer, Smart Watches for Android iOS, 2023',
-    description:
-        'Bluetooth Call and Message Reminder: The smart watch is equipped with HD speaker, after connecting to your phone via Bluetooth, you can directly use the smartwatches to answer or make calls, read messages, store contacts, view call history. The smartwatch can set up more message notifications in "GloryFit" APP. You will never miss any calls and messages during meetings, workout and riding.',
-    price: 50,
-    brand: "Nerunsa",
-    category: "Watch",
+    id: "64a654593e91b8e73a351e9b",
+    name: "iphone 14",
+    description: "Short description",
+    price: 2999,
+    brand: "apple",
+    category: "Phone",
     quantity: 5,
     images: [
         {
-            color: "Black",
-            colorCode: "#000000",
-            image: '/img/201992.jpg',
+            color: "White",
+            colorCode: "#FFFFFF",
+            image:
+                '/img/201992.jpg',
         },
         {
-            color: "Silver",
-            colorCode: "#C0C0C0",
-            image: '/img/790418.jpg',
+            color: "Gray",
+            colorCode: "#808080",
+            image:
+                '/img/790418.jpg',
         },
     ],
     reviews: [
@@ -216,7 +238,7 @@ export const product = {
                 email: "example@gmail.com",
                 emailVerified: null,
                 image:
-                    "https://picsum.photos/200/200?random=1",
+                    "https://images.unsplash.com/photo-1453060590797-2d5f419b54cb?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                 hashedPassword: null,
                 createdAt: "2023-05-30T08:08:53.979Z",
                 updatedAt: "2023-05-30T08:08:53.979Z",
