@@ -1,11 +1,12 @@
 import Container from '@/app/components/ui/Container'
 import React from 'react'
+import CartClient from './CartClient'
 
 const Cart = () => {
   return (
     <div className='pt-8'>
       <Container>
-        <div></div>
+        <CartClient />
       </Container>
     </div>
   )

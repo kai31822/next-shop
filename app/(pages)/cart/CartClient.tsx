@@ -5,6 +5,7 @@ import { useCart } from '@/hooks/useCart'
 import Link from 'next/link'
 import React from 'react'
 import { MdArrowBack } from 'react-icons/md'
+import ItemContent from './ItemContent'
 
 const CartClient = () => {
     const { cartProducts } = useCart()
@@ -34,7 +35,7 @@ const CartClient = () => {
             {/* table body */}
             <div>
                 {cartProducts && cartProducts.map((item) => {
-                    return <div key={item.id}>{item.name}</div>
+                    return <ItemContent key={item.id} item={item} />
                 })}
             </div>
             {/* table foot */}
@@ -48,7 +49,7 @@ const CartClient = () => {
                         <span>$1,000</span>
                     </div>
                     <p className='text-slate-500'>Taxes and shopping calculate at checkout</p>
-                    <Button label='Checkout' onClick={()=>{}}></Button>
+                    <Button label='Checkout' onClick={() => { }}></Button>
                     {/*  */}
                     <Link href={"/"} className='text-slate-500 flex items-center gap-1  mt-2 '>
                         <MdArrowBack></MdArrowBack>
