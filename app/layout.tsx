@@ -6,6 +6,7 @@ import '@radix-ui/themes/styles.css';
 
 import Navbar from '@/app/components/ui/Navbar';
 import Footer from './components/ui/Footer/Footer';
+import CartProvider from '@/Providers/CartProvider';
 
 //
 const inter = Inter({ subsets: ['latin'] });
@@ -27,11 +28,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang='en'>
             <body className={inter.className}>
-                <div className='flex flex-col min-h-screen'>
-                <Navbar></Navbar>
-                <main className='flex-grow'> {children}</main>
-                <Footer></Footer>
-                </div>
+                <CartProvider>
+                    <div className='flex flex-col min-h-screen'>
+                        <Navbar></Navbar>
+                        <main className='flex-grow'> {children}</main>
+                        <Footer></Footer>
+                    </div>
+                </CartProvider>
             </body>
         </html>
     );

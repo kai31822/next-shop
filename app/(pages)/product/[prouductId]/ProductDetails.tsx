@@ -4,6 +4,7 @@ import Button from '@/app/components/ui/product/Button';
 import ProductImage from '@/app/components/ui/product/ProductImage';
 import SetColor from '@/app/components/ui/product/SetColor';
 import SetQuantity from '@/app/components/ui/product/SetQuantity';
+import { useCart } from '@/hooks/useCart';
 import React, { useCallback, useState } from 'react'
 
 interface ProductDetailsProps {
@@ -51,6 +52,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
         price: product.price,
     })
     // console.log(cartProduct);
+
 
     //handleColorSelect
     const handleColorSelect = useCallback((value: SelectedImgType) => {
