@@ -3,11 +3,10 @@ import { Inter, Agbalumo } from 'next/font/google';
 import './globals.css';
 import '@radix-ui/themes/styles.css';
 //ui
-
 import Navbar from '@/app/components/ui/Navbar';
 import Footer from './components/ui/Footer/Footer';
 import CartProvider from '@/Providers/CartProvider';
-
+import { Toaster } from 'react-hot-toast';
 //
 const inter = Inter({ subsets: ['latin'] });
 // const agbalumo = Agbalumo({ weight: '400', subsets: ['latin'] });
@@ -28,6 +27,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang='en'>
             <body className={inter.className}>
+                {/* toast */}
+                <Toaster toastOptions={{
+                    style: {
+                        background: 'rbg(51 65  85)',
+                        color: '#fff'
+                    }
+                }} />
                 <CartProvider>
                     <div className='flex flex-col min-h-screen'>
                         <Navbar></Navbar>
