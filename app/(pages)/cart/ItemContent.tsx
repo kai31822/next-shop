@@ -6,12 +6,14 @@ import Link from 'next/link'
 import truncateText from '@/lib/truncateText'
 import Image from 'next/image'
 import SetQuantity from '@/app/components/ui/product/SetQuantity'
+import { useCart } from '@/hooks/useCart'
 //
 interface ItemContentProps {
     item: CartProductType
 }
 //
 const ItemContent: React.FC<ItemContentProps> = ({ item }) => {
+    const { handleRemoveProductFromCart } = useCart()
     return (
         <div className='grid grid-cols-5 text-xs md:text-sm gap-4 border-[5px] border-slate-200 py-4 items-center'>
             {/* table col1 */}
@@ -26,11 +28,12 @@ const ItemContent: React.FC<ItemContentProps> = ({ item }) => {
                 <div className='flex flex-col justify-between'>
                     <Link href={`/product/${item.id}`}>
                         {truncateText(item.name)}
-                        <div>{item.selectedImg.color}</div>
-                        <div className='w-[70px]'>
-                            <button className='text-slate-500 underline ' onClick={() => { }}>Remove</button>
-                        </div>
                     </Link>
+                    <div>{item.selectedImg.color}</div>
+                    <div className='w-[70px]'>
+                        <button className='text-slate-500 underline ' onClick={() => { handleRemoveProductFromCart(item) }}>Remove</button>
+                    </div>
+
                 </div>
             </div>
             {/* table col2 */}
