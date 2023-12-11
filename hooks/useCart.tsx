@@ -1,5 +1,6 @@
 import { CartProductType } from "@/app/(pages)/product/[prouductId]/ProductDetails";
 import { product } from "@/lib/producttest";
+import { Product } from "@prisma/client";
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import toast from 'react-hot-toast';
 
@@ -8,6 +9,7 @@ type CartContext = {
     cartProducts: CartProductType[] | null
     handleAddProductToCart: (product: CartProductType) => void
     handleRemoveProductFromCart: (product: CartProductType) => void
+    handleCartQtyIncrease: (Product: CartProductType) => void
 }
 
 export const CartContext = createContext<CartContext | null>(null)
@@ -56,12 +58,31 @@ export const CartContextProvider = (props: Props) => {
 
         }
     }, [cartProducts])
-
+    //
+    const handleCartQtyIncrease = useCallback((product: CartProductType) => {
+        let updateCart
+        if (product.quantity === 5) {
+            return toast.error('oops! Maximum reached')
+        }
+        if (cartProducts) {
+            updateCart = [...cartProducts]
+            const existingIndex = cartProducts.findIndex((item) => {
+                return item.id === product.id
+            })
+            if (existingIndex > -1) {
+                updateCart[existingIndex].quantity = ++updateCart[existingIndex].quantity
+            }
+            setCartProducts(updateCart)
+            localStorage.setItem('ShoppingCartItems', JSON.stringify(updateCart))
+        }
+    }, [cartProducts])
+    //
     const value = {
         cartTotalQty,
         cartProducts,
         handleAddProductToCart,
-        handleRemoveProductFromCart
+        handleRemoveProductFromCart,
+        handleCartQtyIncrease
     }
     return <CartContext.Provider value={value} {...props} />
 }
