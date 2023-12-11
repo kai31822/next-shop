@@ -13,7 +13,7 @@ interface ItemContentProps {
 }
 //
 const ItemContent: React.FC<ItemContentProps> = ({ item }) => {
-    const { handleRemoveProductFromCart, handleCartQtyIncrease } = useCart()
+    const { handleRemoveProductFromCart, handleCartQtyIncrease, handleCartQtyDecrease } = useCart()
     return (
         <div className='grid grid-cols-5 text-xs md:text-sm gap-4 border-[5px] border-slate-200 py-4 items-center'>
             {/* table col1 */}
@@ -44,7 +44,7 @@ const ItemContent: React.FC<ItemContentProps> = ({ item }) => {
                 <SetQuantity
                     cartCounter={true}
                     cartProduct={item}
-                    handleQtyDecrease={() => { }}
+                    handleQtyDecrease={() => { handleCartQtyDecrease(item) }}
                     handleQtyIncrease={() => { handleCartQtyIncrease(item) }}></SetQuantity>
             </div>
             <div className='justify-self-end font-semibold'>
