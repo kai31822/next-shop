@@ -11,6 +11,7 @@ type CartContext = {
     handleRemoveProductFromCart: (product: CartProductType) => void
     handleCartQtyIncrease: (Product: CartProductType) => void
     handleCartQtyDecrease: (Product: CartProductType) => void
+    handleClearCart: () => void
 }
 
 export const CartContext = createContext<CartContext | null>(null)
@@ -96,13 +97,20 @@ export const CartContextProvider = (props: Props) => {
         }
     }, [cartProducts])
     //
+    const handleClearCart = useCallback(() => {
+        setCartProducts(null)
+        setCartTotalQty(0)
+        localStorage.setItem('ShoppingCartItems', JSON.stringify(null))
+    }, [cartProducts])
+    //
     const value = {
         cartTotalQty,
         cartProducts,
         handleAddProductToCart,
         handleRemoveProductFromCart,
         handleCartQtyIncrease,
-        handleCartQtyDecrease
+        handleCartQtyDecrease,
+        handleClearCart
     }
     return <CartContext.Provider value={value} {...props} />
 }
