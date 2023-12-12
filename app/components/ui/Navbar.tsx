@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import Container from './Container';
 import { Roboto } from 'next/font/google';
+import CartCount from './Nav/CartCount';
 //font
 const roboto = Roboto({ subsets: ['latin'], weight: ['300'] })
 
@@ -34,8 +35,8 @@ const Navbar = () => {
                 新品上市特別優惠!!!
             </div>
             {/* <nav className='fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600'> */}
-            <Container>
-                <nav className='dark:border-gray-700'>
+            <Container >
+                <nav className='dark:border-gray-700 py-3'>
                     <div className='  flex flex-wrap items-center justify-between gap-3 md:gap-0'>
                         <Link href='/' className={`${roboto.className} font-bold text-2xl`}>Logo</Link>
 
@@ -73,7 +74,7 @@ const Navbar = () => {
                         </div>
                         {/* cart / user */}
                         <div className='flex items-center gap-8 md:gap-12'>
-                            <Link href='/cart'>Cartcount</Link>
+                            <CartCount></CartCount>
                             <h1>UserMenu</h1>
                         </div>
                     </div>
