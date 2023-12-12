@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { CartProductType } from '../product/[prouductId]/ProductDetails'
+import { CartProductType } from '../product/[productId]/ProductDetails'
 import formatPrice from '@/lib/formatPrice'
 import Link from 'next/link'
 import truncateText from '@/lib/truncateText'

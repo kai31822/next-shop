@@ -1,5 +1,5 @@
 'use client'
-import { CartProductType, SelectedImgType } from '@/app/(pages)/product/[prouductId]/ProductDetails'
+import { CartProductType, SelectedImgType } from '@/app/(pages)/product/[productId]/ProductDetails'
 import React from 'react'
 import Image from 'next/image'
 //

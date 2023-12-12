@@ -1,4 +1,4 @@
-import { CartProductType } from "@/app/(pages)/product/[prouductId]/ProductDetails";
+import { CartProductType } from "@/app/(pages)/product/[productId]/ProductDetails";
 import { product } from "@/lib/producttest";
 import { Product } from "@prisma/client";
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
@@ -22,13 +22,38 @@ interface Props {
 
 export const CartContextProvider = (props: Props) => {
     const [cartTotalQty, setCartTotalQty] = useState(0)
+    const [cartTotalAmount, setCartTotalAmount] = useState(0)
     const [cartProducts, setCartProducts] = useState<CartProductType[] | null>(null)
+    //
+    console.log('qty', cartTotalQty);
+    console.log('total', cartTotalAmount);
+
     //
     useEffect(() => {
         const cartItems: any = localStorage.getItem('ShoppingCartItems')
         const cProducts: CartProductType[] | null = JSON.parse(cartItems)
         setCartProducts(cProducts)
     }, [])
+    //
+    useEffect(() => {
+        const getTotals = () => {
+            if (cartProducts) {
+                const { total, qty } = cartProducts?.reduce((acc, item) => {
+                    const itemTotal = item.price * item.quantity
+                    acc.total += itemTotal
+                    acc.qty += item.quantity
+                    return acc
+                }, {
+                    total: 0,
+                    qty: 0
+                })
+
+                setCartTotalQty(qty)
+                setCartTotalAmount(total)
+            }
+        }
+        getTotals()
+    }, [cartProducts])
     //receive a value of product  : addproduct
     const handleAddProductToCart = useCallback((product: CartProductType) => {
         setCartProducts((prev) => {
@@ -102,6 +127,8 @@ export const CartContextProvider = (props: Props) => {
         setCartTotalQty(0)
         localStorage.setItem('ShoppingCartItems', JSON.stringify(null))
     }, [cartProducts])
+    //
+
     //
     const value = {
         cartTotalQty,

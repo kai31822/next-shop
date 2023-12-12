@@ -1,8 +1,11 @@
+
 import Container from '@/app/components/ui/Container';
 import React from 'react'
 import ProductDetails from './ProductDetails';
-import { product } from '@/lib/producttest';
+// import { product } from '@/lib/producttest';
 import ListRating from './ListRating';
+import { products } from '@/lib/producttest';
+
 
 interface Iparams {
   productId?: string
@@ -10,7 +13,12 @@ interface Iparams {
 
 
 const ProudctInfo = ({ params }: { params: Iparams }) => {
-  console.log(params);
+
+
+  console.log("params", params);
+
+  const product = products.find((item) => item.id === params.productId)
+
 
 
   return (

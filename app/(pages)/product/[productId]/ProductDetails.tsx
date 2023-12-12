@@ -27,19 +27,6 @@ export type SelectedImgType = {
     colorCode: string,
     image: string
 }
-// interface Product {
-//     Product_ID?: string
-//     Product_name?: string
-//     Product_description?: string
-//     Price?: number
-//     Image?: Imagetype
-//     Product_quantity?: number
-//     categoryId?: number
-// }
-// interface Imagetype {
-//     color: string
-//     image: string
-// }
 
 
 const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
@@ -55,7 +42,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
         category: product.category,
         brand: product.brand,
         selectedImg: { ...product.images[0] },
-        quantity: 5,
+        quantity: 1,
         price: product.price,
     })
     const router = useRouter()

@@ -1,5 +1,5 @@
 'use client'
-import { CartProductType } from '@/app/(pages)/product/[prouductId]/ProductDetails'
+import { CartProductType } from '@/app/(pages)/product/[productId]/ProductDetails'
 import React from 'react'
 
 //props

@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { CartProductType, SelectedImgType } from '@/app/(pages)/product/[prouductId]/ProductDetails'
+import { CartProductType, SelectedImgType } from '@/app/(pages)/product/[productId]/ProductDetails'
 interface SetColorProps {
     images: SelectedImgType[]
     cartProduct: CartProductType
