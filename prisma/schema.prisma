@@ -3,6 +3,7 @@
 //npx prisma migrate dev
 generator client {
   provider = "prisma-client-js"
+  output   = "prisma-generated/client"
 }
 
 datasource db {
@@ -107,7 +108,7 @@ model Order {
   Order_ID           String   @id @default(uuid())
   Order_status       Status
   //user
-  User               User?    @relation(fields: [UserID], references: [User_ID])
+  User               User?    @relation(fields: [UserID], references: [id])
   UserID             String?
   //
   Express_Address    String?
@@ -131,7 +132,7 @@ enum Status {
 model Cart {
   Cart_ID    String    @id @default(uuid())
   //user
-  User       User?     @relation(fields: [UserID], references: [User_ID])
+  User       User?     @relation(fields: [UserID], references: [id])
   UserID     String?   @unique // One to One
   //guest
   guest      String?
