@@ -1,0 +1,156 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+//npx prisma migrate dev
+generator client {
+  provider = "prisma-client-js"
+  output   = "prisma-generated/client"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// model
+model Account {
+  id                String  @id @default(cuid())
+  userId            String  @map("user_id")
+  type              String
+  provider          String
+  providerAccountId String  @map("provider_account_id")
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String?   @unique
+  password      String
+  role          Role      @default(USER)
+  address       String?
+  phone         Int?
+  //
+  Order         Order[]
+  //One to One  https://www.prisma.io/docs/concepts/components/prisma-schema/relations/one-to-one-relations
+  Cart          Cart?
+  //
+  emailVerified DateTime? @map("email_verified")
+  image         String?
+  accounts      Account[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@map("users")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verificationtokens")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+// one to many https://www.prisma.io/docs/concepts/components/prisma-schema/relations/one-to-many-relations
+model Product {
+  Product_ID          String    @id @default(uuid())
+  Product_name        String
+  Product_description String
+  Price               Int
+  brand               String
+  Image               Image[]
+  Product_quantity    Int       @default(0)
+  // category
+  category            Category  @relation(fields: [categoryId], references: [id])
+  categoryId          Int
+  //
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+  //
+  Details             Details[]
+}
+
+model Image {
+  id                String   @id @default(uuid())
+  color             String
+  image             String
+  Product           Product? @relation(fields: [productProduct_ID], references: [Product_ID])
+  productProduct_ID String?
+}
+
+model Category {
+  id       Int       @id @default(autoincrement())
+  name     String
+  products Product[]
+}
+
+//
+// many to many  https://www.prisma.io/docs/concepts/components/prisma-schema/relations/many-to-many-relations#explicit-many-to-many-relations
+
+model Order {
+  Order_ID           String   @id @default(uuid())
+  Order_status       Status
+  //user
+  User               User?    @relation(fields: [UserID], references: [id])
+  UserID             String?
+  //
+  Express_Address    String?
+  Order_Email        String?
+  Order_Phone        Int?
+  Order_City         String?
+  Order_Postal_code  String?
+  Order_Express_cost Int
+  //
+  Cart               Cart?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+enum Status {
+  Padding
+  Done
+}
+
+//
+model Cart {
+  Cart_ID    String    @id @default(uuid())
+  //user
+  User       User?     @relation(fields: [UserID], references: [id])
+  UserID     String?   @unique // One to One
+  //guest
+  guest      String?
+  Details    Details[]
+  Order      Order?    @relation(fields: [OrderID], references: [Order_ID])
+  OrderID    String?   @unique // One to One
+  Order_Date DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+}
+
+model Details {
+  Order_ID    String   @id @default(uuid())
+  Cart        Cart?    @relation(fields: [CartCart_ID], references: [Cart_ID])
+  CartCart_ID String?
+  Product     Product? @relation(fields: [Product_ID], references: [Product_ID])
+  Product_ID  String?
+  Quantity    Int
+  //
+}
+
+//

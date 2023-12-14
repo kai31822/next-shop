@@ -18,12 +18,12 @@ model Account {
   type              String
   provider          String
   providerAccountId String  @map("provider_account_id")
-  refresh_token     String?
-  access_token      String?
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String?
+  id_token          String? @db.Text
   session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -33,17 +33,17 @@ model Account {
 }
 
 model User {
-  id       String  @id @default(cuid())
-  name     String?
-  email    String? @unique
-  password String
-  role     Role    @default(USER)
-  address  String?
-  phone    Int?
+  id            String    @id @default(cuid())
+  name          String
+  email         String?   @unique
+  password      String
+  role          Role      @default(USER)
+  address       String?
+  phone         Int?
   //
-  Order    Order[]
+  Order         Order[]
   //One to One  https://www.prisma.io/docs/concepts/components/prisma-schema/relations/one-to-one-relations
-  Cart     Cart?
+  Cart          Cart?
   //
   emailVerified DateTime? @map("email_verified")
   image         String?
