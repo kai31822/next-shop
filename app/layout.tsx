@@ -3,10 +3,11 @@ import { Inter, Agbalumo } from 'next/font/google';
 import './globals.css';
 import '@radix-ui/themes/styles.css';
 //ui
-import Navbar from '@/app/components/ui/Navbar';
+import Navbar from '@/app/components/ui/Nav/Navbar';
 import Footer from './components/ui/Footer/Footer';
 import CartProvider from '@/Providers/CartProvider';
 import { Toaster } from 'react-hot-toast';
+import { getCurrentUser } from '@/actions/getCurrentUser';
 //
 const inter = Inter({ subsets: ['latin'] });
 // const agbalumo = Agbalumo({ weight: '400', subsets: ['latin'] });
@@ -23,7 +24,9 @@ export const metadata: Metadata = {
     // },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+
+
     return (
         <html lang='en'>
             <body className={inter.className}>

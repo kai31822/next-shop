@@ -1,5 +1,4 @@
-'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { clsx } from 'clsx';
 //link
@@ -13,19 +12,29 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import Container from './Container';
+import Container from '../Container';
 import { Roboto } from 'next/font/google';
-import CartCount from './Nav/CartCount';
+import CartCount from './CartCount';
+import UserMenu from './UserMenu';
+import { getCurrentUser } from '@/actions/getCurrentUser';
 //font
 const roboto = Roboto({ subsets: ['latin'], weight: ['300'] })
 
-const Navbar = () => {
+const Navbar = async () => {
+
+    //session
+    const currentUser = await getCurrentUser()
+    //test
+    // console.log("user: ", currentUser);
+
+
+
     const links = [
         { label: '配件', href: '/product' },
         { label: '產品情報', href: '/about' },
         { label: '門市資訊', href: '/storeinformation' },
     ];
-    const currentPath = usePathname();
+    // const currentPath = usePathname();
 
     return (
 
@@ -61,9 +70,9 @@ const Navbar = () => {
                                         <Link
                                             href={link.href}
                                             className={clsx({
-                                                'text-teal-500': link.href === currentPath,
-                                                'text-zinc-500': link.href !== currentPath,
-                                                'hover:text-lime-500 transition-colors': true,
+                                                // 'text-teal-500': link.href === currentPath,
+                                                // 'text-zinc-500': link.href !== currentPath,
+                                                // 'hover:text-lime-500 transition-colors': true,
                                             })}
                                         >
                                             {link.label}
@@ -75,7 +84,8 @@ const Navbar = () => {
                         {/* cart / user */}
                         <div className='flex items-center gap-8 md:gap-12'>
                             <CartCount></CartCount>
-                            <h1>UserMenu</h1>
+                            {currentUser? <p className='hidden sm:block'>{currentUser.name}</p>:null}
+                            <UserMenu currentUser={currentUser}></UserMenu>
                         </div>
                     </div>
                 </nav >

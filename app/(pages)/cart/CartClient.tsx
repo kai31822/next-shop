@@ -10,7 +10,7 @@ import formatPrice from '@/lib/formatPrice'
 
 const CartClient = () => {
     const { cartProducts, handleClearCart, cartTotalAmount } = useCart()
-    console.log('cartToTalAmount ===', cartTotalAmount);
+    // console.log('cartToTalAmount ===', cartTotalAmount);
 
     if (!cartProducts || cartProducts.length === 0) {
         return (
