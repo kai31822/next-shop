@@ -143,13 +143,24 @@ exports.Prisma.VerificationTokenScalarFieldEnum = {
 };
 
 exports.Prisma.ProductScalarFieldEnum = {
-  Product_ID: 'Product_ID',
-  Product_name: 'Product_name',
-  Product_description: 'Product_description',
-  Price: 'Price',
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  price: 'price',
   brand: 'brand',
-  Product_quantity: 'Product_quantity',
+  inStock: 'inStock',
+  quantity: 'quantity',
   categoryId: 'categoryId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ReviewScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  productId: 'productId',
+  rating: 'rating',
+  comment: 'comment',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -157,8 +168,9 @@ exports.Prisma.ProductScalarFieldEnum = {
 exports.Prisma.ImageScalarFieldEnum = {
   id: 'id',
   color: 'color',
+  colorCode: 'colorCode',
   image: 'image',
-  productProduct_ID: 'productProduct_ID'
+  productProduct_id: 'productProduct_id'
 };
 
 exports.Prisma.CategoryScalarFieldEnum = {
@@ -167,9 +179,13 @@ exports.Prisma.CategoryScalarFieldEnum = {
 };
 
 exports.Prisma.OrderScalarFieldEnum = {
-  Order_ID: 'Order_ID',
-  Order_status: 'Order_status',
-  UserID: 'UserID',
+  id: 'id',
+  user: 'user',
+  amount: 'amount',
+  currency: 'currency',
+  status: 'status',
+  deliverStatus: 'deliverStatus',
+  paymentIntentId: 'paymentIntentId',
   Express_Address: 'Express_Address',
   Order_Email: 'Order_Email',
   Order_Phone: 'Order_Phone',
@@ -177,14 +193,14 @@ exports.Prisma.OrderScalarFieldEnum = {
   Order_Postal_code: 'Order_Postal_code',
   Order_Express_cost: 'Order_Express_cost',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  productId: 'productId'
 };
 
 exports.Prisma.CartScalarFieldEnum = {
   Cart_ID: 'Cart_ID',
   UserID: 'UserID',
   guest: 'guest',
-  OrderID: 'OrderID',
   Order_Date: 'Order_Date',
   updatedAt: 'updatedAt'
 };
@@ -210,16 +226,12 @@ exports.Role = exports.$Enums.Role = {
   ADMIN: 'ADMIN'
 };
 
-exports.Status = exports.$Enums.Status = {
-  Padding: 'Padding',
-  Done: 'Done'
-};
-
 exports.Prisma.ModelName = {
   Account: 'Account',
   User: 'User',
   VerificationToken: 'VerificationToken',
   Product: 'Product',
+  Review: 'Review',
   Image: 'Image',
   Category: 'Category',
   Order: 'Order',

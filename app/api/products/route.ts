@@ -4,24 +4,32 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 //prisma
 import prisma from "@/prisma/client";
+import { getCurrentUser } from '@/actions/getCurrentUser';
 
 // createProducts
 export const createProductsSchema = z.object({
-    Product_name: z.string(),
-    Product_description: z.string(),
-    Price: z.number(),
+    name: z.string(),
+    description: z.string(),
+    price: z.number(),
     brand: z.string(),
-    Product_quantity: z.number(),
-    Image: z.object({
-        id: z.string(),
+    quantity: z.number(),
+    categoryId: z.number(),
+    inStock: z.boolean(),
+    image: z.object({
         color: z.string(),
+        colorCode:z.string(),
         image: z.string()
     }),
-    categoryId: z.number()
+
 });
 
 //Create Products
 export async function POST(request: NextRequest) {
+    const currentUser = await getCurrentUser()
+    if (!currentUser || currentUser.role !== 'ADMIN') {
+        return NextResponse.error()
+    }
+
     const body = await request.json();
     const validation = createProductsSchema.safeParse(body);
     //we have to validate our request to make sure it doesn't have bed data
@@ -31,12 +39,13 @@ export async function POST(request: NextRequest) {
     //create New Products
     const newProduct = await prisma.product.create({
         data: {
-            Product_name: body.Product_name,
-            Product_description: body.Product_description,
-            Price: body.Price,
+            name: body.name,
+            description: body.description,
+            price: body.price,
             brand: body.brand,
-            Product_quantity: body.Product_quantity,
-            Image: body.Image,
+            quantity: body.quantity,
+            inStock:body.inStock,
+            image: body.image,
             categoryId: body.categoryId
 
         }
