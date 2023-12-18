@@ -11,11 +11,18 @@ import { colors } from '@/lib/Colors'
 import React, { useCallback, useEffect, useState } from 'react'
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import firebaseApp from '@/lib/firebase'
 
 export type ImageType = {
     color: string
     colorCode: string
-    image: string | File | null
+    image: File | null
+}
+export type UploadedImageType = {
+    color: string
+    colorCode: string
+    image: string
 }
 
 const AddProductForm = () => {
@@ -68,12 +75,13 @@ const AddProductForm = () => {
             return [...prev, value]
         })
     }, [])
+
     //submit
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
         console.log("Product Date:", data)
         //database
         setIsLoading(true)
-        // let uploadedImages: UploadedImageType[] = []
+        let uploadedImages: UploadedImageType[] = []
 
         if (!data.category) {
             setIsLoading(false)
@@ -91,13 +99,61 @@ const AddProductForm = () => {
                     if (item.image) {
                         const fileName = new Date().getTime() + '-' + item.image.name
                         //store : npm i formidable
+                        const storage = getStorage(firebaseApp)
+                        const storageRef = ref(storage, `products/${fileName}`);
+                        const uploadTask = uploadBytesResumable(storageRef, item.image)
+
+                        await new Promise<void>((resolve, reject) => {
+                            uploadTask.on(
+                                'state_changed',
+                                (snapshot) => {
+                                    // Observe state change events such as progress, pause, and resume
+                                    // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+                                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                                    console.log('Upload is ' + progress + '% done');
+                                    switch (snapshot.state) {
+                                        case 'paused':
+                                            console.log('Upload is paused');
+                                            break;
+                                        case 'running':
+                                            console.log('Upload is running');
+                                            break;
+                                    }
+                                },
+                                (error) => {
+                                    // Handle unsuccessful uploads
+                                    console.log('Error uploading image', error);
+
+                                    reject(error)
+                                },
+                                () => {
+                                    // Handle successful uploads on complete
+                                    // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+                                    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                                        uploadedImages.push({
+                                            ...item, image: downloadURL
+                                        })
+                                        console.log('File available at', downloadURL);
+                                        resolve()
+                                    }).catch((error) => {
+                                        console.log("Error getting the download URL", error);
+                                        reject(error)
+                                    });
+                                }
+                            );
+                        })
                     }
                 }
             }
-            catch { }
-            finally { }
-            return null
+            catch (error) {
+                setIsLoading(false)
+                console.log('Error handeling image upload', error);
+                return toast.error('Error handeling image upload')
+            }
         }
+        await handleImageUploads()
+        const productData = { ...data, images: uploadedImages }
+        console.log("productData", productData);
     }
 
 
@@ -161,10 +217,9 @@ const AddProductForm = () => {
             <div className='mb-2 font-semibold'>Select a Category</div>
             <div className='grid grid-cols-2 md:grid-cols-3 gap-3 max-h-[50vh] overflow-y-auto'>
                 {categories.map((item) => {
-                    if (item.label === 'All') {
-                        return null
-                    }
-
+                    // if (item.label === 'All') {
+                    //     return null
+                    // }
                     return (
                         <div key={item.label} className='col-span'>
                             <CategoryInput
@@ -178,7 +233,7 @@ const AddProductForm = () => {
                 })}
             </div>
             {/*  */}
-            <div className='w-full flex flex-col flex-wrap gap-4'>
+            <div className='w-full flex flex-col flex-wrap gap-4 h-[500px]'>
                 {/*  */}
                 <div>
                     <div className='font-bold'>Select the available product colors and upload their images</div>

@@ -62,7 +62,7 @@ const SelectColor: React.FC<SelectColorProps> = ({
                     <div className='flex flex-row gap-2 text-sm col-span-2 items-center justify-between'>
                         <p>{file?.name}</p>
                         <div className='w-[70px]'>
-                            <Button label='Cancel' small onClick={() => {
+                            <Button label='Cancel' small outline onClick={() => {
                                 setFile(null)
                                 removeImageFromState(item)
                             }} />

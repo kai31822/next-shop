@@ -8,6 +8,7 @@ import Footer from './components/ui/Footer/Footer';
 import CartProvider from '@/Providers/CartProvider';
 import { Toaster } from 'react-hot-toast';
 import { getCurrentUser } from '@/actions/getCurrentUser';
+
 //
 const inter = Inter({ subsets: ['latin'] });
 // const agbalumo = Agbalumo({ weight: '400', subsets: ['latin'] });
