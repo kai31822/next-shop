@@ -17,7 +17,7 @@ export const createProductsSchema = z.object({
     inStock: z.boolean(),
     image: z.object({
         color: z.string(),
-        colorCode:z.string(),
+        colorCode: z.string(),
         image: z.string()
     }),
 
@@ -44,7 +44,7 @@ export async function POST(request: NextRequest) {
             price: body.price,
             brand: body.brand,
             quantity: body.quantity,
-            inStock:body.inStock,
+            inStock: body.inStock,
             image: body.image,
             categoryId: body.categoryId
 
@@ -58,4 +58,25 @@ export async function POST(request: NextRequest) {
 export async function GET() {
     const products = await prisma.product.findMany()
     return NextResponse.json(products, { status: 201 })
+}
+
+//PUT
+export async function PUT(request: Request) {
+    const currentUser = await getCurrentUser()
+    if (!currentUser || currentUser.role !== 'ADMIN') {
+        return NextResponse.error()
+    }
+
+    const body = await request.json()
+    const { id, inStock } = body
+
+    const product = await prisma.product.update({
+        where: {
+            id: id
+        },
+        data: {
+            inStock
+        }
+    })
+    return NextResponse.json(product)
 }

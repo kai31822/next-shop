@@ -26,7 +26,7 @@ const AdminNav = () => {
                         <AdminItem label='Manage Product' icon={MdDns} selected={pathname === '/admin/manageproduct'}></AdminItem>
                     </Link>
                     {/* 4 */}
-                    <Link href='/admin/manageorders'>
+                    <Link href='/admin/manage-orders'>
                         <AdminItem label='Manage Orders' icon={MdFormatListBulleted} selected={pathname === '/admin/manageorders'}></AdminItem>
                     </Link>
                 </div>

@@ -133,7 +133,7 @@ model Order {
   status             String
   deliverStatus      String
   paymentIntentId    String   @unique
-  products           Product? @relation(fields: [productId], references: [id])
+  products           Product[]
   //
   Express_Address    String?
   Order_Email        String?
